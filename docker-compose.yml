@@ -1,0 +1,41 @@
+version: "3.0"
+services:
+  mongodb:
+    volumes:
+      - ./data-node:/data/db
+    image: "mongo"
+    ports:
+      - "27017:27017"
+    networks:
+      - webappnetwork
+
+    command: mongod --noauth
+  backend:
+    build: ./nextexpress/
+    ports:
+      - "4000:4000"
+    volumes:
+      - ./nextexpress:/usr/src/app
+    depends_on:
+      - mongodb
+    restart: always
+    environment:
+      - ENV=dev
+    networks:
+      - webappnetwork
+  frontend:
+    networks:
+      - webappnetwork
+    build: ./tomskb/
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./tomskb:/usr/src/app
+    depends_on:
+      - backend
+    environment:
+      - ENV=dev
+    restart: always
+networks:
+  webappnetwork:
+    driver: bridge
