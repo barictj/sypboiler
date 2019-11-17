@@ -1,0 +1,39 @@
+.home-logo-container{
+    background-image: linear-gradient( #422e6b, #855cd6);
+    border-radius: 95px;
+    border: 2px solid black;
+    width: 107px;
+    padding: 2rem;
+    color: white;
+    font-size: 1.8rem;
+    text-shadow: 1px 1px 2px black, 0 0 25px dodgerblue, 0 0 5px dodgerblue;
+
+}
+.home-logo-root{
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    flex-direction: column;
+    align-items: center;
+    width: auto;
+    text-shadow: 1px 1px 2px black, 0 0 25px gold, 0 0 5px gold;
+    background-color: white;
+    color: dodgerblue;
+    padding: 2rem;
+}
+.imgmongo{
+    -webkit-animation: mymove 3s infinite linear;
+    animation: mymove 3s infinite linear;
+    margin: .2rem;
+    margin-bottom: -.35rem;
+    animation-delay: 0s;
+    height: 1.2rem;
+    width: 1.2rem;
+}
+
+@-webkit-keyframes mymove {
+    100% {-webkit-transform: rotate(360deg);}
+}
+@keyframes mymove {
+    100% {transform: rotate(360deg);}
+}

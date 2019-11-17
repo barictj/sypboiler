@@ -1,0 +1,41 @@
+version: "3.0"
+services:
+  mongodb:
+    volumes:
+      - ./data/db
+    image: "mongo"
+    ports:
+      - "27017:27017"
+    networks:
+      - webappnetwork
+
+    command: mongod --noauth
+  backend:
+    build: ./backend/
+    ports:
+      - "4000:4000"
+    volumes:
+      - ./backend:/usr/src/app
+    depends_on:
+      - mongodb
+    restart: always
+    environment:
+      - ENV=dev
+    networks:
+      - webappnetwork
+  frontend:
+    networks:
+      - webappnetwork
+    build: ./frontend/
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./frontend:/usr/src/app
+    depends_on:
+      - backend
+    environment:
+      - ENV=dev
+    restart: always
+networks:
+  webappnetwork:
+    driver: bridge
